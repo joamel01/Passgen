@@ -28,7 +28,12 @@ impl App {
         match generator::generate(&self.options) {
             Ok(value) => {
                 self.output = value;
-                self.status = "Ny kod skapad med Windows slumpkälla.".into();
+                self.status = match generator::entropy_bits(&self.options) {
+                    Some(bits) => format!(
+                        "Ny kod skapad med Windows slumpkälla. Uppskattad entropi: {bits:.0} bitar."
+                    ),
+                    None => "Ny kod skapad med Windows slumpkälla.".into(),
+                };
             }
             Err(error) => self.status = error,
         }
