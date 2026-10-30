@@ -1,0 +1,13 @@
+[package]
+name = "nyckelverkstad"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = { version = "0.37", default-features = false, features = ["default_fonts", "glow"] }
+getrandom = "0.4"
+
+[profile.release]
+strip = true
+lto = true
+
